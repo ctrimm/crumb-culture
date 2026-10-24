@@ -1,0 +1,519 @@
+/* Crumb Culture design system
+   A warm cream ground, dark espresso type, a burnt-crust accent and the
+   template's signature 50/50 split — two photographs side by side with a
+   cream card laid over the seam. Serif display type (Fraunces), a clean
+   sans for reading, monospace for prices, times and notes. */
+
+:root {
+  --bg: #faf5ec;
+  --surface: #f0e3cd;
+  --ink: #2e211a;
+  --deep: #33241a;
+  --accent: #9c4415;
+  --deep-ink: #2e211a;
+  --deep-text: #faf5ec;
+  --serif: "Fraunces", "Didot", Georgia, serif;
+  --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  --pad: clamp(20px, 4.5vw, 68px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { opacity: 0.75; }
+img { display: block; max-width: 100%; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2.2rem;
+}
+.band .section-label { color: var(--surface); }
+
+.text-link {
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.pill-link {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 13px 30px;
+}
+.pill-link:hover { opacity: 1; background: var(--ink); color: var(--bg); }
+
+/* Scroll reveal — elements rise into place. Only elements below the
+   initial viewport get hidden (JS adds .pre); everything else is visible
+   by default, so content can never be stranded invisible.
+   Deliberately NO opacity fade: a half-faded element is a half-blended
+   color, and accessibility audits (axe/Lighthouse) that snapshot a page
+   mid-transition report phantom contrast failures. Hidden here means
+   visibility: hidden — fully out of the accessibility tree until shown. */
+.reveal.pre {
+  visibility: hidden;
+  transform: translateY(24px);
+  transition: transform 0.7s ease;
+}
+.reveal.pre.in { visibility: visible; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal.pre { visibility: visible; transform: none; transition: none; }
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 24px var(--pad) 18px;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+}
+.site-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: 0.02em;
+}
+.site-nav { display: flex; gap: clamp(16px, 2.6vw, 36px); flex-wrap: wrap; }
+.site-nav a {
+  font-size: 15.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.site-nav a.active { text-decoration: underline; text-underline-offset: 5px; }
+
+/* ---------- Hero: the split ---------- */
+.hero { padding: 2.6vw var(--pad) 0; }
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 1.6vw;
+}
+.hero-split {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.hero-split figure { overflow: hidden; }
+.hero-split img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1 / 1; }
+.hero-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(440px, 88%);
+  background: var(--bg);
+  text-align: center;
+  padding: clamp(26px, 3vw, 44px) clamp(22px, 2.6vw, 40px);
+}
+.hero-card h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(30px, 3.4vw, 46px);
+  line-height: 1.08;
+  margin-bottom: 1rem;
+}
+.hero-card p { font-size: 16.5px; margin-bottom: 1.5rem; }
+
+/* ---------- Manifesto ---------- */
+.manifesto { padding: 5.5vw var(--pad) 4.5vw; max-width: 1100px; }
+.manifesto p {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.5;
+}
+.manifesto p + p { margin-top: 1.4em; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3vw;
+  margin-top: 4vw;
+}
+.stat { display: flex; flex-direction: column; gap: 10px; }
+.stat dd {
+  font-family: var(--serif);
+  font-size: clamp(38px, 4.4vw, 66px);
+  line-height: 1;
+  order: -1;
+}
+.stat dt {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---------- Split feature rows (50/50) ---------- */
+.featured { padding: 2.5vw var(--pad) 5vw; }
+.feature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4.5vw;
+  align-items: center;
+  padding: 3vw 0;
+}
+.feature-row.flip .feature-meta { order: -1; }
+.feature-row img { width: 100%; height: auto; }
+.feature-kicker {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.feature-meta h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(28px, 3.2vw, 46px);
+  line-height: 1.08;
+  margin-bottom: 1rem;
+}
+.feature-meta p { max-width: 44ch; }
+.feature-price {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--accent);
+}
+.feature-meta .text-link { display: inline-block; margin-top: 1.3rem; }
+
+/* ---------- Services index ---------- */
+.services-index { padding: 2.5vw var(--pad) 5vw; }
+.service-rows { list-style: none; border-top: 1px solid color-mix(in srgb, var(--ink) 30%, transparent); }
+.service-rows li { border-bottom: 1px solid color-mix(in srgb, var(--ink) 30%, transparent); }
+.service-rows a {
+  display: grid;
+  grid-template-columns: 70px 1fr 40px;
+  align-items: baseline;
+  gap: 2vw;
+  padding: 1.5rem 0;
+}
+.service-num { font-family: var(--mono); font-size: 14px; color: var(--accent); }
+.service-name {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.4vw, 50px);
+  line-height: 1.05;
+}
+.service-arrow { font-size: 24px; text-align: right; }
+
+/* ---------- Dark band: the bake day ---------- */
+.band {
+  background: var(--deep);
+  color: var(--deep-text);
+  padding: 5vw var(--pad) 5.5vw;
+  margin-top: 3vw;
+}
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3vw;
+}
+.process-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(28px, 2.8vw, 42px);
+  color: var(--surface);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.process-step h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 24px;
+  margin-bottom: 0.5rem;
+}
+.process-step p { font-size: 16.5px; max-width: 30ch; }
+
+/* ---------- Stockists ---------- */
+.commissions { padding: 4vw var(--pad) 5vw; }
+.commission-list { list-style: none; }
+.commission-row {
+  display: grid;
+  grid-template-columns: 130px 1fr auto;
+  gap: 3vw;
+  align-items: baseline;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 28%, transparent);
+}
+.commission-year { font-family: var(--mono); font-size: 13.5px; color: var(--accent); }
+.commission-name { font-family: var(--serif); font-size: clamp(21px, 2.3vw, 32px); }
+a.commission-name:hover { text-decoration: underline; text-underline-offset: 5px; opacity: 1; }
+.commission-location {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- Closing CTA ---------- */
+.closing { padding: 3vw var(--pad) 7vw; text-align: center; }
+.closing-line {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4.4vw, 62px);
+  line-height: 1.08;
+  margin-bottom: 1.8rem;
+}
+
+/* ---------- Page heads ---------- */
+.page-head { padding: 4vw var(--pad) 2.6vw; max-width: 1100px; }
+.page-eyebrow {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.4rem;
+}
+.page-head h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(38px, 5.2vw, 80px);
+  line-height: 1.02;
+}
+.page-intro {
+  font-size: clamp(16.5px, 1.5vw, 20px);
+  line-height: 1.7;
+  margin-top: 1.6rem;
+  max-width: 62ch;
+}
+
+/* ---------- Menu page ---------- */
+.menu-group { padding: 1.5vw var(--pad) 3vw; }
+.bake-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4vw;
+}
+.bake-card img { width: 100%; height: auto; }
+.bake-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-top: 1.1rem;
+}
+.bake-card-head h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(24px, 2.6vw, 38px);
+  line-height: 1.1;
+}
+.bake-days {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0.4rem 0 0.6rem;
+}
+.schedule-list { list-style: none; }
+.schedule-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 3vw;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 28%, transparent);
+}
+.schedule-row .bake-name { font-family: var(--serif); font-size: 21px; }
+.schedule-row .bake-when { font-family: var(--mono); font-size: 14px; }
+
+/* ---------- Service detail lists ---------- */
+.service-detail-list { padding: 1vw var(--pad) 4vw; }
+.service-detail {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 3vw;
+  padding: 2.6vw 0;
+  border-top: 1px solid color-mix(in srgb, var(--ink) 30%, transparent);
+}
+.service-detail h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(27px, 3.2vw, 46px);
+  margin-bottom: 0.7rem;
+}
+.service-detail p { max-width: 58ch; }
+.service-detail .service-num { font-size: 17px; padding-top: 0.9rem; }
+.chip-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1.3rem;
+}
+.chip-list li {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid color-mix(in srgb, currentColor 55%, transparent);
+  border-radius: 999px;
+  padding: 7px 14px;
+}
+
+/* ---------- Story ---------- */
+.story-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5vw;
+  padding: 1vw var(--pad) 5vw;
+  align-items: start;
+}
+.story-photo img { width: 100%; height: auto; }
+.story-copy p { font-size: clamp(16.5px, 1.5vw, 20px); line-height: 1.75; }
+.story-copy p + p { margin-top: 1.4em; }
+.story-copy .availability { color: var(--accent); font-family: var(--mono); font-size: 15px; }
+.principles { margin-top: 3.2rem; }
+.principle { padding: 1.5rem 0; border-top: 1px solid color-mix(in srgb, var(--ink) 30%, transparent); }
+.principle h2 { font-family: var(--serif); font-weight: 500; font-size: 26px; margin-bottom: 0.4rem; }
+.principle p { font-size: 16.5px; }
+
+/* ---------- Visit ---------- */
+.visit-photo img { width: 100%; height: auto; }
+.visit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5vw;
+  padding: 1vw var(--pad) 7vw;
+  align-items: start;
+}
+.visit-label {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 2rem 0 0.8rem;
+}
+.visit-label:first-child { margin-top: 0; }
+.visit-email {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.8vw, 40px);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.hours-list { list-style: none; }
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 3vw;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 28%, transparent);
+}
+.hours-days { font-family: var(--serif); font-size: 20px; }
+.hours-time { font-family: var(--mono); font-size: 14.5px; }
+.note-list { list-style: none; }
+.note-list li {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 28%, transparent);
+}
+
+/* ---------- Bake detail ---------- */
+.bake-layout {
+  display: grid;
+  grid-template-columns: 38% 1fr;
+  gap: 5vw;
+  padding: 1vw var(--pad) 4vw;
+  align-items: start;
+}
+.bake-copy p { font-size: clamp(17px, 1.5vw, 21px); line-height: 1.65; max-width: 42ch; }
+.bake-copy .section-label { margin: 2.4rem 0 0; }
+.bake-copy .text-link { display: inline-block; margin-top: 2.2rem; }
+.bake-photo img { width: 100%; height: auto; }
+.bake-next {
+  padding: 0 var(--pad) 7vw;
+  font-family: var(--mono);
+  font-size: 15px;
+  letter-spacing: 0.05em;
+}
+.bake-next a { text-decoration: underline; text-underline-offset: 5px; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--deep);
+  color: var(--deep-text);
+  padding: 4.5vw var(--pad) 34px;
+  margin-top: 2vw;
+}
+.footer-name {
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.6vw, 54px);
+  line-height: 1.05;
+}
+.footer-meta {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 0.9rem;
+}
+.footer-email {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(22px, 2.4vw, 34px);
+  display: inline-block;
+  margin-top: 1.6rem;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 4.5vw;
+  font-size: 15px;
+}
+.footer-socials a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 760px) {
+  .stats { grid-template-columns: 1fr; gap: 1.6rem; }
+  .process-grid { grid-template-columns: 1fr 1fr; }
+  .feature-row, .story-layout, .visit-grid, .bake-layout, .bake-grid { grid-template-columns: 1fr; }
+  .feature-row.flip .feature-meta { order: 0; }
+  .service-detail { grid-template-columns: 1fr; gap: 0.4rem; }
+  .service-detail .service-num { padding-top: 0; }
+  .service-rows a { grid-template-columns: 44px 1fr 24px; }
+  .commission-row { grid-template-columns: 100px 1fr; }
+  .commission-location { display: none; }
+  .hero-card {
+    position: static;
+    transform: none;
+    width: 100%;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  .hero-split { margin-bottom: 10px; }
+}

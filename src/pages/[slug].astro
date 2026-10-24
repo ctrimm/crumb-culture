@@ -1,0 +1,50 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, bakeRoutes, imgSrcset, url } from "../data/site";
+
+export function getStaticPaths() {
+  return bakeRoutes();
+}
+
+const { bake, next } = Astro.props;
+---
+
+<Base
+  title={`${bake.title.toUpperCase()} — ${site.name.toUpperCase()}`}
+  current="bake"
+  description={bake.summary}
+>
+  <section class="page-head">
+    <p class="page-eyebrow">{bake.category}</p>
+    <h1>{bake.title}</h1>
+    <p class="page-intro">
+      {bake.price} · Baked {bake.bakeDays.toLowerCase()}
+    </p>
+  </section>
+
+  <section class="bake-layout">
+    <div class="bake-copy">
+      <p>{bake.summary}</p>
+      <h2 class="section-label">The details</h2>
+      <ul class="chip-list">
+        {bake.details.map((s) => <li>{s}</li>)}
+      </ul>
+      <a class="text-link" href={url("/visit")}>Get one while it is warm</a>
+    </div>
+    <figure class="bake-photo">
+      <img
+        src={url(bake.image)}
+        alt={bake.imageAlt}
+        width="752"
+        height="752"
+        fetchpriority="high"
+        srcset={imgSrcset(bake.image, [480, 960], 752)}
+        sizes="(max-width: 760px) 92vw, 54vw"
+      />
+    </figure>
+  </section>
+
+  <nav class="bake-next" aria-label="Next bake">
+    Next bake — <a href={url(`/${next.slug}`)}>{next.title}</a>
+  </nav>
+</Base>

@@ -1,0 +1,59 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, mailto, imgSrcset, url } from "../data/site";
+
+const visit = site.visit;
+---
+
+<Base title={`VISIT — ${site.name.toUpperCase()}`} current="visit">
+  <section class="page-head">
+    <p class="page-eyebrow">Visit</p>
+    <h1>{visit.heading}</h1>
+    <p class="page-intro">{visit.text}</p>
+  </section>
+
+  <figure class="visit-photo" style="padding: 0 var(--pad);">
+    <img
+      src={url(visit.image)}
+      alt={visit.imageAlt}
+      width="1920"
+      height="1280"
+      fetchpriority="high"
+      srcset={imgSrcset(visit.image, [640, 960, 1440], 1920)}
+      sizes="92vw"
+    />
+  </figure>
+
+  <section class="visit-grid">
+    <div>
+      <h2 class="visit-label">Find us</h2>
+      <p>
+        {visit.address.map((line) => (
+          <>
+            {line}
+            <br />
+          </>
+        ))}
+      </p>
+      <h2 class="visit-label">Write to us</h2>
+      <a class="visit-email" href={mailto(site.email)}>{site.email}</a>
+      <h2 class="visit-label">Good to know</h2>
+      <ul class="note-list">
+        {visit.notes.map((n) => <li>{n}</li>)}
+      </ul>
+    </div>
+    <div>
+      <h2 class="visit-label">Opening hours</h2>
+      <ul class="hours-list">
+        {
+          visit.hours.map((h) => (
+            <li class="hours-row">
+              <span class="hours-days">{h.days}</span>
+              <span class="hours-time">{h.time}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>
