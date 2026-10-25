@@ -13,6 +13,17 @@ make it theirs without touching code.
 
 **Live preview:** https://ctrimm.github.io/crumb-culture/
 
+## Screenshots
+
+All framed with PrettySnap on the same warm cream background.
+
+![Home](screenshots/prettysnap-home.png)
+![Menu](screenshots/prettysnap-menu.png)
+![Country Sourdough](screenshots/prettysnap-detail.png)
+![Story](screenshots/prettysnap-story.png)
+![Visit](screenshots/prettysnap-visit.png)
+![Mobile home](screenshots/prettysnap-mobile.png)
+
 ## Make it yours
 
 Edit **`site.config.ts`** — that is the only file you need. It holds:

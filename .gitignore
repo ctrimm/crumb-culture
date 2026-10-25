@@ -4,5 +4,5 @@ dist/
 reports/
 test-results/
 screenshots/*
-!screenshots/prettysnap-home.png
+!screenshots/prettysnap-*.png
 *.log
