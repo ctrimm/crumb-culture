@@ -24,6 +24,15 @@ All framed with PrettySnap on the same warm cream background.
 ![Visit](screenshots/prettysnap-visit.png)
 ![Mobile home](screenshots/prettysnap-mobile.png)
 
+## In motion
+
+The micro-interactions, recorded live: load-in, hero drift, row and
+photo hovers, and a click through to a detail page.
+
+![Motion sample](screenshots/motion/motion.webp)
+
+Full-quality video: [motion.mp4](screenshots/motion/motion.mp4)
+
 ## Make it yours
 
 Edit **`site.config.ts`** — that is the only file you need. It holds:

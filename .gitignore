@@ -6,3 +6,5 @@ test-results/
 screenshots/*
 !screenshots/prettysnap-*.png
 *.log
+!screenshots/motion/
+!screenshots/motion/*
