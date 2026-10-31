@@ -51,3 +51,19 @@ contradicts an entry, revisit it here rather than letting it harden.
   gates Accessibility/Best Practices/SEO at 100 with Performance
   report-only in CI (runner CPU dominates it — local runs are the
   signal); reveal animations avoid opacity fades.
+
+## 2026-10-30 — Micro-interactions pass
+
+- CSS-only motion layer appended to `src/styles/global.css` (one marked
+  section, removable as a block): nav underline sweeps, image zooms
+  inside their frames (`a:has(> img)` + overflow hidden), index-row
+  name/arrow slides, pill lifts with a press settle, chip rises, row
+  leans, next-link arrows, footer-email underline sweeps, accent text
+  selection, and visible focus rings.
+- Hero motion is a slow transform-only "ken burns" drift (14–18s,
+  alternate) — composited, no layout shift, no Lighthouse CLS cost.
+- Hard rules kept from the series: no opacity fades on content (axe
+  snapshots mid-fade report phantom contrast failures), and a
+  `prefers-reduced-motion` block stills every new animation/transition.
+- Verified: full test suites green and Lighthouse Accessibility /
+  Best Practices / SEO still 100 after the change.
